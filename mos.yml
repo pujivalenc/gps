@@ -13,6 +13,7 @@ includes:
 #filesystem:
 #  - fs
 
+config_schema:
   - ["gps", "o", { title: "GPS Settings"}]
   #- ["gps.uart_no", "i", 2, { title: "Serial port number for gps"}] 
   - ["gps.rx_gpio", "i", 14, {title: "RX pin; -1 = use default"}]
