@@ -12,7 +12,7 @@
 #include "gps.h"
 #include "minmea.h"
 
-static int gps_uart_no = 0;
+int gps_uart_no = 2;
 static size_t gpsDataAvailable = 0;
 static struct minmea_sentence_rmc lastFrame;
 
@@ -189,13 +189,16 @@ static void uart_dispatcher(int uart_no, void *arg)
 
 bool mgos_gps_init(void)
 {
-
     struct mgos_uart_config ucfg;
-    gps_uart_no = mgos_sys_config_get_gps_uart_no();
     mgos_uart_config_set_defaults(gps_uart_no, &ucfg);
-
-    ucfg.baud_rate = mgos_sys_config_get_gps_baud_rate();
+    ucfg.baud_rate = 115200;
     ucfg.num_data_bits = 8;
+    ucfg.parity = MGOS_UART_PARITY_NONE;
+    ucfg.stop_bits = MGOS_UART_STOP_BITS_1;
+    ucfg.dev.tx_gpio = 12;
+    ucfg.dev.rx_gpio = 14;
+ 
+
     //ucfg.parity = MGOS_UART_PARITY_NONE;
     //ucfg.stop_bits = MGOS_UART_STOP_BITS_1;
     if (!mgos_uart_configure(gps_uart_no, &ucfg))
