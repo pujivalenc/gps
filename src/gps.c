@@ -5,7 +5,7 @@
 #include "mgos_app.h"
 #include "mgos_gpio.h"
 #include "mgos_timers.h"
-#include "mgos_sys_config.h"
+//#include "mgos_sys_config.h"
 #include "mgos_uart.h"
 #include "common/json_utils.h"
 
